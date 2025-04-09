@@ -1,8 +1,12 @@
 package com.example.management.controller;
 
+import com.example.management.dto.BranchDto;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import com.example.management.service.BranchService;
+
+import java.util.List;
 
 @RestController
 public class DemoController {
@@ -21,4 +25,5 @@ public class DemoController {
     public ResponseEntity<String> adminOnly() {
         return ResponseEntity.ok("Hello from admin only url");
     }
+
 }
