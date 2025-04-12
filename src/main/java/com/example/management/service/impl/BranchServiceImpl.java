@@ -20,14 +20,16 @@ public class BranchServiceImpl implements BranchService {
     }
 
     private BranchDto mapToDto(Branch branch) {
-        return new BranchDto(branch.getId(), branch.getFirstName(), branch.getLastName());
+        return new BranchDto(branch.getId(), branch.getName(), branch.getLocation(), branch.getPhoneNumber(), branch.getOrgId());
     }
 
     private Branch mapToEntity(BranchDto dto) {
         Branch branch = new Branch();
         branch.setId(dto.getId());
-        branch.setFirstName(dto.getFirstName());
-        branch.setLastName(dto.getLastName());
+        branch.setName(dto.getName());
+        branch.setLocation(dto.getLocation());
+        branch.setPhoneNumber(dto.getPhoneNumber());
+        branch.setOrgId(dto.getOrgId());
         return branch;
     }
 
@@ -57,8 +59,10 @@ public class BranchServiceImpl implements BranchService {
         Branch branch = branchRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Branch not found with ID: "+ id));
 
-        branch.setFirstName(branchDto.getFirstName());
-        branch.setLastName(branchDto.getLastName());
+        branch.setName(branchDto.getName());
+        branch.setLocation(branchDto.getLocation());
+        branch.setPhoneNumber(branchDto.getPhoneNumber());
+        branch.setOrgId(branchDto.getOrgId());
 
         Branch updated = branchRepository.save(branch);
         return mapToDto(updated);
