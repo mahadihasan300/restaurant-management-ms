@@ -2,6 +2,7 @@ package com.example.management.service.impl;
 
 import com.example.management.entity.Branch;
 import com.example.management.dto.BranchDto;
+import com.example.management.entity.Organization;
 import com.example.management.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import com.example.management.repository.BranchRepository;
@@ -20,7 +21,7 @@ public class BranchServiceImpl implements BranchService {
     }
 
     private BranchDto mapToDto(Branch branch) {
-        return new BranchDto(branch.getId(), branch.getName(), branch.getLocation(), branch.getPhoneNumber(), branch.getOrgId());
+        return new BranchDto(branch.getId(), branch.getName(), branch.getLocation(), branch.getPhoneNumber(), branch.getOrganization().getId());
     }
 
     private Branch mapToEntity(BranchDto dto) {
@@ -29,7 +30,11 @@ public class BranchServiceImpl implements BranchService {
         branch.setName(dto.getName());
         branch.setLocation(dto.getLocation());
         branch.setPhoneNumber(dto.getPhoneNumber());
-        branch.setOrgId(dto.getOrgId());
+
+        Organization org = new Organization();
+        org.setId(dto.getOrganizationId());
+        branch.setOrganization(org);
+
         return branch;
     }
 
@@ -62,7 +67,10 @@ public class BranchServiceImpl implements BranchService {
         branch.setName(branchDto.getName());
         branch.setLocation(branchDto.getLocation());
         branch.setPhoneNumber(branchDto.getPhoneNumber());
-        branch.setOrgId(branchDto.getOrgId());
+
+        Organization org = new Organization();
+        org.setId(branchDto.getOrganizationId());
+        branch.setOrganization(org);
 
         Branch updated = branchRepository.save(branch);
         return mapToDto(updated);

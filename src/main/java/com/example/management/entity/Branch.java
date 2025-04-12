@@ -18,6 +18,7 @@ public class Branch extends BaseModel {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "org_id")
-    private Long orgId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "org_id", nullable = false)
+    private Organization organization;
 }

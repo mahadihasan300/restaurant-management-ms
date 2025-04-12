@@ -12,6 +12,6 @@ public class BranchDto {
     private String name;
     private String location;
     private String phoneNumber;
-    private Long orgId;
+    private Long organizationId;
 }
 
